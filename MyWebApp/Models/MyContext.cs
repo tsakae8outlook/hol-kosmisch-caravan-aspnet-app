@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿//using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyWebApp.Models
 {
@@ -11,7 +12,8 @@ namespace MyWebApp.Models
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
     
-        public MyContext() : base("name=DatabaseConnectionString")
+        //public MyContext() : base("name=DatabaseConnectionString")
+        public MyContext(DbContextOptions<MyContext> options) : base(options)
         {
         }
     }

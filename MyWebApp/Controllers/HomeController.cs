@@ -7,17 +7,19 @@ namespace MyWebApp.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = Session["message"]?.ToString() ?? "";
-            return View();
-        }
+            //ViewBag.Message = Session["message"]?.ToString() ?? "";
+            //return View();
+            string message = HttpContext.Session.GetString("message");
+            return View(new MyForm { Message = message});
 
         [HttpPost]
         public ActionResult Index(MyForm item)
         {
-            if (!string.IsNullOrWhiteSpace(item?.Message))
-            {
-                Session["message"] = item.Message;
-            }
+            // if (!string.IsNullOrWhiteSpace(item?.Message))
+            // {
+            //     Session["message"] = item.Message;
+            // }
+            HttpContext.Session.SetString("message",item.Message);
             return RedirectToAction("Index");
         }
     }
