@@ -2,16 +2,17 @@
 //using System.Web.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace MyWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IDistributedCache cashe;
+        private readonly IDistributedCache cache;
 
         public HomeController(IDistributedCache cache)
         {
-            this,cache = cache;
+            this.cache = cache;
         }
 
         public ActionResult Index()
@@ -31,7 +32,7 @@ namespace MyWebApp.Controllers
             //     Session["message"] = item.Message;
             // }
             //HttpContext.Session.SetString("message",item.Message);
-            cache.SetString("message",item.message);
+            cache.SetString("message",item.Message);
             return RedirectToAction("Index");
         }
     }
