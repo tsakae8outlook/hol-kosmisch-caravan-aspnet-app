@@ -1,5 +1,7 @@
 ﻿using MyWebApp.Models;
-using System.Web.Mvc;
+//using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace MyWebApp.Controllers
 {
@@ -11,6 +13,7 @@ namespace MyWebApp.Controllers
             //return View();
             string message = HttpContext.Session.GetString("message");
             return View(new MyForm { Message = message});
+        }
 
         [HttpPost]
         public ActionResult Index(MyForm item)

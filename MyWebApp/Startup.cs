@@ -37,8 +37,8 @@ namespace MyWebApp
 
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services
-                .AddMvc(options=> options.Filters.Add(new MyWebApp.Filters.LogFilter()))
-                .SerCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .AddMvc(options => options.Filters.Add(new MyWebApp.Filters.LogFilter()))
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<MyContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnectionString")));
@@ -71,7 +71,7 @@ namespace MyWebApp
             {
                 routes.MapAreaRoute(
                     name: "adminArea",
-                    areName: "Admin",
+                    areaName: "Admin",
                     template: "Admin/{controller=Default}/{action=Index}/{id?}");
                 
                 routes.MapRoute(
