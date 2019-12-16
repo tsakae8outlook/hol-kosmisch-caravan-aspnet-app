@@ -7,22 +7,31 @@ namespace MyWebApp.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IDistributedCache cashe;
+
+        public HomeController(IDistributedCache cache)
+        {
+            this,cache = cache;
+        }
+
         public ActionResult Index()
         {
             //ViewBag.Message = Session["message"]?.ToString() ?? "";
             //return View();
-            string message = HttpContext.Session.GetString("message");
+            //string message = HttpContext.Session.GetString("message");
+            string message = cache.GetString("message");
             return View(new MyForm { Message = message});
         }
 
         [HttpPost]
-        public ActionResult Index(MyForm item)
+        public IActionResult Index(MyForm item)
         {
             // if (!string.IsNullOrWhiteSpace(item?.Message))
             // {
             //     Session["message"] = item.Message;
             // }
-            HttpContext.Session.SetString("message",item.Message);
+            //HttpContext.Session.SetString("message",item.Message);
+            cache.SetString("message",item.message);
             return RedirectToAction("Index");
         }
     }
